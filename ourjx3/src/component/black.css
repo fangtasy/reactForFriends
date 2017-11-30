@@ -1,0 +1,35 @@
+.square-green {
+
+	width: 100px;
+	height: 50px;
+	background: #43dc43;
+}
+.square-black{
+	color:white;
+	width: 100px;
+	height: 50px;
+	background: black;
+}
+.square-red{
+	color:white;
+	width: 100px;
+	height: 50px;
+	background: red;
+}
+#roll{
+	width: 120px;
+	color: white;
+	background-color: black;
+}
+#roll:hover {
+	color:red;
+	background-color: #e7e7e7;
+}
+
+@media(max-width:560px){
+	.square-green,.square-red,.square-black{
+		font-size: 3vw;
+		width: 15%;
+		height: 7.5%;
+	}
+}
