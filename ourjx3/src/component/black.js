@@ -31,7 +31,6 @@ class Black extends Component {
 		var members=this.state.member.slice();
 		members[black[chosen]]=2;
 		this.setState({member:members});
-		console.log(members);
 
 	}
 	render(){
@@ -39,7 +38,7 @@ class Black extends Component {
 		var colums=Array(5).fill(null);
 		return(
 		  <div>
-			<h2 col-sm-12>都那么黑，结果都一样</h2>
+			<h2 >都那么黑，结果都一样</h2>
 			<div>{
 				rows.map((rows,id)=>{
 					return(

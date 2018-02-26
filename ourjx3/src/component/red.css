@@ -1,0 +1,6 @@
+.delete {
+	opacity: 0;
+}
+button:hover {
+	opacity: 1;
+}

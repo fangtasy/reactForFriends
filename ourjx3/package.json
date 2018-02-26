@@ -1,28 +1,32 @@
 {
-  "name": "jinxin",
-  "version": "0.1.0",
+  "name": "ourjx3",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.17.1",
-    "cloudinary-react": "^1.0.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-responsive-carousel": "^3.1.28",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "index.js",
-  "devDependencies": {},
-  "keywords": [
-    "jx3"
-  ],
-  "author": "jinxin",
-  "license": "ISC"
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cloudinary-react": "^1.0.4",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.16.2",
+    "jade": "~1.11.0",
+    "moment": "^2.20.1",
+    "morgan": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-modal": "^3.1.10",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "serve-favicon": "^2.4.5"
+  },
+  "proxy": "http://localhost:3000"
 }

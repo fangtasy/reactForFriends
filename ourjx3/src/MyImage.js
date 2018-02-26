@@ -12,7 +12,6 @@ class MyImage extends Component{
         // Request for images tagged xmas       
         axios.get('https://res.cloudinary.com/duvxnwzrw/image/list/family.json')
             .then(res => {
-                console.log(res.data.resources);
                 this.setState({gallery: res.data.resources});
             });
     }

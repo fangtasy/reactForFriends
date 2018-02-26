@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './banner.jpeg';
 import './App.css';
 import MyImage from './MyImage.js';
 import Friends from './friends.js'
 import {Switch,Route, Link} from 'react-router-dom';
 import Black from './component/black.js';
 import Red from './component/red.js';
-import Xiaobai from './friends/xiaobai.js'
-
+import Recipes from './component/recipes.js';
+import Posts from './component/posts.js';
+import Xiaobai from './friends/xiaobai.js';
+import Register from './component/register.js'
+import Login from './component/login'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <img src={logo} className="banner" alt="logo" />
         </header>
           
           <div className="col-sm-2">
@@ -30,7 +32,10 @@ class App extends Component {
               <Route exact path="/" component={Home}/>
               <Route path='/friends/:number' component={Xiaobai}/>
               <Route path="/black" component={Black} />
-              <Route path="/red" component={Red} /> 
+              <Route path="/red" component={Red} />
+              <Route path="/meals" component={Recipes} />
+              <Route path="/posts" component={Posts} />
+              <Route path="/register" component={Register} />
               <Route component={Notfound} />
               </Switch>
             </div>
@@ -43,7 +48,8 @@ class Home extends Component{
   render(){
     return (
       <div >  
-          <MainFrame />  
+          <MainFrame />
+          <br/>  
           <MyImage className="col-sm-10"/>
          
       </div>  
@@ -51,7 +57,6 @@ class Home extends Component{
   }
 }
 class MainFrame extends Component{
-  
     
   render(){
     return(
@@ -99,73 +104,25 @@ class SideBar extends Component{
             </li>
             <li><Link to="/black">谁去黑本</Link></li>
             <li><Link to="/red">欧皇时刻</Link></li>
+            <li><Link to="/meals">今天吃啥</Link></li>
+            <li><Link to="/posts">有啥说啥</Link></li>
+
           </ul>
           
           </div>
           </Switch>
-        <div className="input-group">
+        {/*<div className="input-group">
           <input type="text" className="form-control" placeholder="小白是欧皇.." />
           <span className="input-group-btn">
             <button className="btn btn-default" type="button">
               <span className="glyphicon glyphicon-search"></span>
             </button>
           </span>
-        </div>
+        </div>*/}
       </div>
       
     );
   }
 }
-class Login extends Component{
-  render(){
-    return(
-      <div>
-        
-         
-          <div  className="dropdown">
-            <button  className="col-md-12" data-toggle="dropdown">
-              <b>Login</b> <span className="caret"></span>
-            </button>
-              <ul id="login-dp" className="dropdown-menu">
-                <li>
-                   <div className="row">
-                    <div className="col-md-12">
-                      Login via
-                      <div className="social-buttons">
-                        <a href="#" className="btn btn-fb"><i className="fa fa-facebook"></i> Facebook</a>
-                        <a href="#" className="btn btn-tw"><i className="fa fa-twitter"></i> Twitter</a>
-                      </div>
-                      or
-                      <form className="form" role="form" method="post" action="login" acceptCharset="UTF-8" id="login-nav">
-                        <div className="form-group">
-                            <label className="sr-only" htmlFor="exampleInputEmail2">Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail2" placeholder="Email address" required />
-                        </div>
-                        <div className="form-group">
-                            <label className="sr-only" htmlFor="exampleInputPassword2">Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password" required />
-                            <div className="help-block text-right"><a href="">Forget the password ?</a></div>
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" className="btn btn-primary btn-block">Sign in</button>
-                        </div>
-                        <div className="checkbox">
-                          <label>
-                            <input type="checkbox" /> keep me logged-in
-                          </label>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="bottom text-center">
-                      New here ? <a href="#"><b>Join Us</b></a>
-                    </div>
-                  </div>
-              </li>
-            </ul>
-          </div>
-        
-      </div>
-    );
-  }
-}
+
 export default App;
