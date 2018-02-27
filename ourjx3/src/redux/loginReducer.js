@@ -5,7 +5,7 @@ const initState={
 }
 export function login({id,pwd}){
 	if(!id||!pwd) return loginFailed("user or password cannot be empty")
-	return dispatch=>axios.get('/users/'+id)
+	return dispatch=>axios.post('/users/login',{id,pwd})
 	.then(res=>{
 		console.log(res.data)
 		if(res.data===null) return dispatch(loginFailed("id or password is incorrect!"))

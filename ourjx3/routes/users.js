@@ -11,10 +11,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE User BY ID */
-router.get('/:id', function(req, res, next) {
-  User.findOne({"id":req.params.id}, function (err, post) {
+router.post('/login', function(req, res, next) {
+  const {id,pwd}=req.body;
+  User.findOne({"id":id,"pwd":pwd},{"pwd":0}, function (err, post) {
     if (err) return res.json({code:1,msg:'incorrect id or password'});
-    res.json({code:0});
+    res.cookie("userid",post._id)
+    res.json({code:0,data:post});
   });
 });
 

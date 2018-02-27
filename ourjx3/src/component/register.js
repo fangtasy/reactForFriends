@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {withRouter} from 'react-router-dom'
+import {withRouter,Redirect} from 'react-router-dom'
 import {register} from '../redux/registerReducer'
 import {connect} from 'react-redux'
 
@@ -20,10 +20,6 @@ class Register extends Component{
 	handleClick(e){
 		e.preventDefault()
 		this.props.register(this.state)
-		if(this.props.registerStatus.regReducer.isAuth===true){
-			this.props.history.push('/')
-		}
-		
 	}
 	handleChange(key,e){
 		this.setState({
@@ -33,6 +29,7 @@ class Register extends Component{
 	render(){
 		return(
 			<div>
+			{this.props.registerStatus.regReducer.isAuth?<Redirect to={this.state.id} />:null}
 			<form>
 			  <div className="form-group">
 				<label>用户名</label>
