@@ -3,8 +3,10 @@ var router = express.Router();
 var mongoose=require('mongoose');
 var User = require('../models/users.js')
 /* GET ALL UserS */
+const _filter = {"pwd":0,"__v":0}
+
 router.get('/', function(req, res, next) {
-  User.find(function (err, products) {
+  User.find({},_filter,function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
@@ -13,7 +15,7 @@ router.get('/', function(req, res, next) {
 /* GET SINGLE User BY ID */
 router.post('/login', function(req, res, next) {
   const {id,pwd}=req.body;
-  User.findOne({"id":id,"pwd":pwd},{"pwd":0}, function (err, post) {
+  User.findOne({"id":id,"pwd":pwd},_filter, function (err, post) {
     if (err) return res.json({code:1,msg:'incorrect id or password'});
     res.cookie("userid",post._id)
     res.json({code:0,data:post});

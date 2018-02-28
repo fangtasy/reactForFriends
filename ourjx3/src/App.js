@@ -8,7 +8,7 @@ import Black from './component/black.js';
 import Red from './component/red.js';
 import Recipes from './component/recipes.js';
 import Posts from './component/posts.js';
-import Xiaobai from './friends/xiaobai.js';
+import Xiaobai from './friends/friendInfo.js';
 import Register from './component/register.js'
 import Login from './component/login'
 
