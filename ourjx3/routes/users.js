@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   const {id,pwd}=req.body;
   User.findOne({"id":id,"pwd":pwd},_filter, function (err, post) {
-    if (err) return res.json({code:1,msg:'incorrect id or password'});
+    if (!post) return res.json({code:1,msg:'incorrect id or password'});
     res.cookie("userid",post._id)
     res.json({code:0,data:post});
   });
@@ -32,6 +32,7 @@ router.post('/register', function(req, res, next) {
     if(post){return res.json({code:1,msg:'has registered'})}
     User.create(req.body, function (err, post) {
       if (err) return res.json({code:1, msg:'there is an error'});
+      res.cookie("userid",post._id);
       res.json({code:0});
     });
   })
@@ -39,8 +40,12 @@ router.post('/register', function(req, res, next) {
 });
 
 /* UPDATE User */
-router.put('/:id', function(req, res, next) {
-  User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/updateInfo', function(req, res, next) {
+  const userid=req.cookie.userid
+  if(!userid) {
+    return json.dump({code:1})
+  }
+  User.findByIdAndUpdate(userid, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

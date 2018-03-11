@@ -7,17 +7,18 @@ import {Link} from 'react-router-dom'
 class PersonInfo extends Component{
 	constructor(props){
 		super(props)
+		this.state={id:this.props.match.params.id}
 		this.props.getInfo(this.props.match.params.id);
 	}
-	componentWillMount(){
-		
+	componentDidMount(){
+		//this.setState({id:this.props.match.params.id})
 	}
 	render(){
 		//this.props.getInfo(this.props.match.params.id);
 		
 		return(<div>
 			<h2>个人主页</h2>
-			<Link to="/info/updateInfo"><button>修改信息</button></Link>
+			<Link to={"/info/updateInfo/"+this.state.id} ><button>修改信息</button></Link>
 			<div>头像</div>
 			<div>
 			{console.log(this.props.info.qiyu)}

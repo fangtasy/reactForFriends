@@ -21,7 +21,7 @@ class Login extends Component{
     e.preventDefault()
     this.props.login(this.state)
     this.props.history.push("/")
-    console.log(this.props)
+   // console.log(this.props)
   }
   handleLogout(){
     this.props.logout()

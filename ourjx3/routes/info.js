@@ -20,10 +20,12 @@ router.post('/', function(req, res, next) {
 });
 
 /* UPDATE info */
-router.put('/:id', function(req, res, next) {
-  info.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/updateInfo/:id', function(req, res, next) {
+  info.findOneAndUpdate(req.params.id, req.body, function(err, post) {
+      console.log(post)
     if (err) return next(err);
-    res.json(post);
+    const data=Object.assign({},{},req.body)
+    return{code:0,data}
   });
 });
 

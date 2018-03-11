@@ -1,26 +1,34 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {updateInfo} from '../redux/infoReducer'
+import {updateInfo,getInfo} from '../redux/infoReducer'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom';
 
 class UpdateInfo extends Component{
 	constructor(props){
 		super(props)
 		this.state={
-			id:'',
-		    nickname:'',
-			cname: '',
-			menpai: '',
-			achievement: '',
-			zhuangfen: '',
-			geqian: '',
+			id:this.props.update.showReducer.id,
+			nickname:this.props.update.showReducer.nickname,
+			cname:this.props.update.showReducer.cname,
+			menpai:this.props.update.showReducer.menpai,
+			achievement:this.props.update.showReducer.achievement,
+			zhuangfen:this.props.update.showReducer.zhuangfen,
+			geqian:this.props.update.showReducer.geqian,
 		}
+		this.props.getInfo(this.props.match.params.id)
+		this.handleClick=this.handleClick.bind(this)
+	}
+	componentDidMount(){
+		this.props.getInfo(this.props.match.params.id)
 	}
 	handleChange(key,e){
 		this.setState({[key]:e.target.value})
 	}
-	handleClick(){
+	handleClick(e){
+		e.preventDefault()
 		this.props.updateInfo(this.state)
+		this.props.history.push('/info/'+this.props.update.showReducer.id)
 	}
 	render(){
 		return(
@@ -44,9 +52,9 @@ class UpdateInfo extends Component{
 			</div>)
 	}
 }
-const mapStatetoProps=state=>{
+const mapStatetoProps=(state)=>{
 	return {update:state}
 }
-const actionCreators={updateInfo}
+const actionCreators={updateInfo,getInfo}
 UpdateInfo=connect(mapStatetoProps,actionCreators)(UpdateInfo)
-export default  UpdateInfo
+export default withRouter(UpdateInfo)
