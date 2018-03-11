@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var InfoSchema = new mongoose.Schema({
 	id: Number,
 	nickname: String,
+	avatar:String,
 	cname: String,
 	menpai: String,
 	achievement: Number,

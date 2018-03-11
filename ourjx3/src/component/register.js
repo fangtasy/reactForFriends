@@ -20,6 +20,7 @@ class Register extends Component{
 	handleClick(e){
 		e.preventDefault()
 		this.props.register(this.state)
+		this.props.history.push("/")
 	}
 	handleChange(key,e){
 		this.setState({

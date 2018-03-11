@@ -8,9 +8,11 @@ import Black from './component/black.js';
 import Red from './component/red.js';
 import Recipes from './component/recipes.js';
 import Posts from './component/posts.js';
-import Xiaobai from './friends/xiaobai.js';
+import Xiaobai from './friends/friendInfo.js';
 import Register from './component/register.js'
 import Login from './component/login'
+import PersonInfo from './friends/person'
+import UpdateInfo from './friends/updateInfo'
 
 class App extends Component {
   render() {
@@ -36,6 +38,9 @@ class App extends Component {
               <Route path="/meals" component={Recipes} />
               <Route path="/posts" component={Posts} />
               <Route path="/register" component={Register} />
+              <Route path="/info/updateInfo/:id" component={UpdateInfo}/>
+              <Route path="/info/:id" component={PersonInfo} />
+              
               <Route component={Notfound} />
               </Switch>
             </div>

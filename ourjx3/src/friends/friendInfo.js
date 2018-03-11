@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createStore } from 'redux';
-import getInfo from '../data/getInfo.js';
 import axios from 'axios';
 import './personInfo.css';
 //let store=createStore(getInfo);
@@ -36,18 +35,5 @@ class Xiaobai extends Component{
 		);
 	}
 }
-class Layout extends Component{
-	render(){
-		return(
-		  <div className="container">
-			<div className="square-left">1</div>
-			<div className="square-right">2</div>
-			<div className="round">icon</div>
-			<div className="square-left-bottom">3</div>
-			<div className="square-right-bottom">4</div>
-		  </div>
-		);
-	}
-	
-}
+
 export default Xiaobai

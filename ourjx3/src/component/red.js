@@ -39,20 +39,7 @@ class Red extends Component {
             console.log(error);
         });
     }
-   //  handleClick(){
-   //    this.setState({length:this.state.qiyus.length+1});  
-   //  }
-  	// componentDidUpdate(prevProps, prevState){
-      
-   //    if (this.state.length !== this.state.qiyus.length){
-  	// 	  axios.get('/ouhuang')
-   //        .then(res => {
-   //    	  this.setState({qiyus: res.data})
-   //      }).catch(function (error) {
-   //          console.log(error); 
-   //      });
-   //    }
-   //  }
+ 
 	render(){
 		return(
 			<div className="col-sm-10">

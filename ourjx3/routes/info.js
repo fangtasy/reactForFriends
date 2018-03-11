@@ -1,22 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mongoose=require('mongoose');
-var info = require('../models/info.js')
-/* GET ALL infoS */
-router.get('/', function(req, res, next) {
-  info.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
-});
+const express = require('express');
+const router = express.Router();
+const mongoose=require('mongoose');
+const info = require('../models/info.js')
 
-/* GET SINGLE info BY ID */
-// router.get('/:id', function(req, res, next) {
-//   info.findById(req.params.id, function (err, post) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
+const _filter = {"pwd":0,"_v":0}
 router.get('/:uid', function(req, res, next) {
   info.findOne({"id":req.params.uid}, function (err, post) {
     if (err) return next(err);
@@ -33,10 +20,12 @@ router.post('/', function(req, res, next) {
 });
 
 /* UPDATE info */
-router.put('/:id', function(req, res, next) {
-  info.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/updateInfo/:id', function(req, res, next) {
+  info.findOneAndUpdate(req.params.id, req.body, function(err, post) {
+      console.log(post)
     if (err) return next(err);
-    res.json(post);
+    const data=Object.assign({},{},req.body)
+    return{code:0,data}
   });
 });
 
