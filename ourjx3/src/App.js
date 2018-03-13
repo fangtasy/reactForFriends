@@ -96,12 +96,10 @@ class SideBar extends Component{
   render(){
     return(
       <div className="csidenav">
-      <h4>非酋集中营</h4>
-        
+         <h4 className="header" >非酋集中营</h4>
         <Switch>
-        <div>
           <ul className="nav nav-pills nav-stacked">
-
+            
             <li ><Link to="/">主页</Link></li>
             <li className="dropdown"><a className="dropdown-toggle" data-toggle="dropdown" href="#section2">黑鬼们 
             <span className="caret"></span></a>
@@ -113,17 +111,10 @@ class SideBar extends Component{
             <li><Link to="/posts">有啥说啥</Link></li>
 
           </ul>
+      
           
-          </div>
           </Switch>
-        {/*<div className="input-group">
-          <input type="text" className="form-control" placeholder="小白是欧皇.." />
-          <span className="input-group-btn">
-            <button className="btn btn-default" type="button">
-              <span className="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>*/}
+ 
       </div>
       
     );

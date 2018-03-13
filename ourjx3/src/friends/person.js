@@ -10,9 +10,8 @@ class PersonInfo extends Component{
 		this.state={id:this.props.match.params.id}
 		this.props.getInfo(this.props.match.params.id);
 	}
-	componentDidMount(){
-		//this.setState({id:this.props.match.params.id})
-	}
+
+	addQiyu
 	render(){
 		//this.props.getInfo(this.props.match.params.id);
 		
@@ -21,7 +20,6 @@ class PersonInfo extends Component{
 			<Link to={"/info/updateInfo/"+this.state.id} ><button>修改信息</button></Link>
 			<div>头像</div>
 			<div>
-			{console.log(this.props.info.qiyu)}
 				基本信息
 				<label>昵称</label><div>{this.props.info.nickname}</div>
 				<label>角色名</label><div>{this.props.info.cname}</div>
@@ -36,13 +34,14 @@ class PersonInfo extends Component{
 					return(<div key={i}>{qiyu}</div>)
 				})
 				}
+				<button onClick={this.addQiyu}>+</button>
 			</div>
 			<div>
 				标签
 				{this.props.info.tag.map((tag,i)=>{
 					return (<div key={i}>{tag}</div>)})
 				}
-				<button>+</button>
+				<button onClick={this.addTag}>+</button>
 			</div>
 
 			</div>)

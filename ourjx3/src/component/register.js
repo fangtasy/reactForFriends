@@ -20,7 +20,7 @@ class Register extends Component{
 	handleClick(e){
 		e.preventDefault()
 		this.props.register(this.state)
-		this.props.history.push("/")
+		//this.props.history.push("/")
 	}
 	handleChange(key,e){
 		this.setState({
@@ -30,7 +30,8 @@ class Register extends Component{
 	render(){
 		return(
 			<div>
-			{this.props.registerStatus.regReducer.isAuth?<Redirect to={this.state.id} />:null}
+			{this.props.registerStatus.regReducer.isAuth?<Redirect to={'info/'+this.state.id} />:null}
+			<div>{this.props.registerStatus.regReducer.msg}</div>
 			<form>
 			  <div className="form-group">
 				<label>用户名</label>

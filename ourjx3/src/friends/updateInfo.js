@@ -27,6 +27,7 @@ class UpdateInfo extends Component{
 	}
 	handleClick(e){
 		e.preventDefault()
+		console.log(this.state)
 		this.props.updateInfo(this.state)
 		this.props.history.push('/info/'+this.props.update.showReducer.id)
 	}
