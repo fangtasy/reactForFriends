@@ -21,8 +21,9 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE info */
 router.put('/updateInfo/:id', function(req, res, next) {
-  info.findOneAndUpdate(req.params.id, req.body, function(err, post) {
-      console.log(post)
+  console.log(req.cookies.userid)
+  info.findOneAndUpdate({"id":req.cookies.userid}, req.body,  function(err, post) {
+      console.log('update',post,req.cookies.userid)
     if (err) return next(err);
     const data=Object.assign({},{},req.body)
     return{code:0,data}
@@ -31,7 +32,7 @@ router.put('/updateInfo/:id', function(req, res, next) {
 
 /* DELETE info */
 router.delete('/:id', function(req, res, next) {
-  info.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  info.findOneAndRemove({"id":req.cookies.userid}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

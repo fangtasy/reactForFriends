@@ -34,7 +34,10 @@ export function register({id,name,pwd,repwd,groupid}){
 	return insert=>axios.post('/users/register',{id,pwd})
 	.then(res=>{
 
-		if(res.data.code==0) return insert(regSuccess({id,pwd}))
-		else return insert(regFailed("Failed"));
+		if(res.data.code==0) {
+			axios.post('/info',{id})
+			return insert(regSuccess({id,pwd}))
+		}
+		else return insert(regFailed(res.data.msg));
 	})
 }
