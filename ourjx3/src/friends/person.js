@@ -4,32 +4,38 @@ import {Route} from 'react-router-dom'
 import {getInfo} from '../redux/infoReducer'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import cookies from 'browser-cookies'
+import { Card, Avatar,Button,Icon } from 'antd';
+import './personInfo.css'
+const { Meta } = Card;
 class PersonInfo extends Component{
 	constructor(props){
 		super(props)
-		this.state={id:this.props.match.params.id}
-		this.props.getInfo(this.props.match.params.id);
+		this.state={id:cookies.get('userid')}
+		this.props.getInfo(this.state.id);
 	}
 
-	addQiyu
+	addQiyu(){
+
+	}
 	render(){
-		//this.props.getInfo(this.props.match.params.id);
-		
-		return(<div>
-			<h2>个人主页</h2>
-			<Link to={"/info/updateInfo/"+this.state.id} ><button>修改信息</button></Link>
-			<div>头像</div>
-			<div>
-				基本信息
-				<label>昵称</label><div>{this.props.info.nickname}</div>
-				<label>角色名</label><div>{this.props.info.cname}</div>
-				<label>门派</label><div>{this.props.info.menpai}</div>
-				<label>个性签名</label><div>{this.props.info.geqian}</div>
-				<label>成就点数</label><div>{this.props.info.achievement}</div>
-				<label>装分</label><div>{this.props.info.zhuangfen}</div>
-			
-			</div>
-			<div>
+		if(!this.state.id) return <h2>请先登录</h2>
+		return(
+			<div style={{ background: '#ECECEC', margin: '30px' }}>
+			<Card
+    			//style={{ width: 300 }}
+    			cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
+    			actions={[<Link to={'/info/updateInfo/'+cookies.get('userid')}><Icon type="edit" /></Link>]}>
+    			<Meta
+      				title="个人主页"
+    			/>
+    			<div><label>昵称：</label>{this.props.info.nickname}</div>
+				<div><label>角色名：</label>{this.props.info.cname}</div>
+				<div><label>门派：</label>{this.props.info.menpai}</div>
+				<div><label>个性签名：</label>{this.props.info.geqian}</div>
+				<div><label>成就点数：</label>{this.props.info.achievement}</div>
+				<div><label>装分：</label>{this.props.info.zhuangfen}</div>
+				<div>
 				奇遇信息：{this.props.info.qiyu.map((qiyu,i)=>{
 					return(<div key={i}>{qiyu}</div>)
 				})
@@ -43,8 +49,9 @@ class PersonInfo extends Component{
 				}
 				<button onClick={this.addTag}>+</button>
 			</div>
-
-			</div>)
+  			</Card>
+  			</div>
+			)
 	}
 }
 const mapStatetoProps=state=>{

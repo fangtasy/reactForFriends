@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import AddQiyu from './addQiyu.js'
 import './red.css'
-import { createBrowserHistory as createHistory } from 'history'
+import { AutoComplete } from 'antd';
 class Red extends Component {
 	constructor(props){
 		super(props);
@@ -10,9 +10,8 @@ class Red extends Component {
 			qiyus:[],
       //length: 1,
 		}
-    
+    this.handleAddClicked=this.handleAddClicked.bind(this)
 	}
-	history = createHistory(this.props);
 	componentDidMount() {
     	axios.get('/ouhuang')
           .then(res => {
@@ -39,12 +38,20 @@ class Red extends Component {
             console.log(error);
         });
     }
- 
+    handleAddClicked(){
+      axios.get('/ouhuang')
+          .then(res => {
+          this.setState({qiyus: res.data})
+        })
+          .catch(function (error) {
+            console.log(error);
+        });
+    }
 	render(){
 		return(
 			<div className="col-sm-10">
-			<h2 >黑鬼们， 已经<span>{}</span>天没人出奇遇了</h2>
-			<AddQiyu history={this.history} />
+			<h2 >黑鬼是不会出奇遇的！</h2>
+			<AddQiyu addClicked={this.handleAddClicked} />
 			<table className="table table-striped" >
   				<thead>
     			  <tr>

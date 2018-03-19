@@ -4,6 +4,19 @@ const mongoose=require('mongoose');
 const info = require('../models/info.js')
 
 const _filter = {"pwd":0,"_v":0}
+
+router.get('/', function(req, res, next) {
+  info.find(function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+router.get('/person', function(req, res, next) {
+  info.findOne({"id":req.cookies.userid}, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 router.get('/:uid', function(req, res, next) {
   info.findOne({"id":req.params.uid}, function (err, post) {
     if (err) return next(err);

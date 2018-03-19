@@ -9,9 +9,10 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@team-griffin/react-router-connected": "^0.3.0",
     "antd": "^3.3.0",
-    "antd-init": "^2.0.6",
     "body-parser": "~1.18.2",
+    "browser-cookies": "^1.2.0",
     "cloudinary-react": "^1.0.4",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
