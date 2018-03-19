@@ -3,21 +3,42 @@ import axios from 'axios'
 import {Route} from 'react-router-dom'
 import {getFriendInfo} from '../redux/infoReducer'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 import { Card, Avatar,Button,Icon } from 'antd';
+import cookies from 'browser-cookies'
 import './personInfo.css'
+
 const { Meta } = Card;
 class FriendInfo extends Component{
 	constructor(props){
 		super(props)
 		this.state={id:this.props.match.params.number}
-		this.props.getFriendInfo(this.state.id);
+		this.props.getFriendInfo(this.state.id)
+	}
+	componentWillMount(){
+		console.log('componentWillMount()')
+	}
+	componentDidMount(){
+		if(this.state.id!==this.props.match.params.number){
+			this.props.history.push('/friends/'+this.props.match.params.number)
+		}
+	}
+	componentWillReceiveProps(){
+		//this.setState({id:this.props.match.params.number})
 	}
 
-	addQiyu(){
+	componentWillUpdate(){
+		
+	}
+	componentDidUpdate(){
+		if(this.state.id!==this.props.match.params.number){
 
+			this.setState({id:this.props.match.params.number})
+			this.props.getFriendInfo(this.props.match.params.number)
+		}
 	}
 	render(){
+		if(!cookies.get('userid')) return <h2>请先登录</h2>
 		
 		return(
 			<div style={{ background: '#ECECEC', margin: '30px' }}>
@@ -28,6 +49,7 @@ class FriendInfo extends Component{
     			<Meta
       				title="好友主页"
     			/>
+    			<div><label>id：</label>{this.props.match.params.number}</div>
     			<div><label>昵称：</label>{this.props.info.nickname}</div>
 				<div><label>角色名：</label>{this.props.info.cname}</div>
 				<div><label>门派：</label>{this.props.info.menpai}</div>
@@ -57,5 +79,5 @@ const mapStatetoProps=state=>{
 	return {info:state.showReducer}
 }
 const actionCreators={getFriendInfo}
-FriendInfo = connect(mapStatetoProps,actionCreators)(FriendInfo)
+FriendInfo = withRouter(connect(mapStatetoProps,actionCreators)(FriendInfo))
 export default FriendInfo;

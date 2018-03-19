@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var info = require('./routes/info');
 var users = require('./routes/users');
 var ouhuang = require('./routes/ouhuang');
+var posts = require('./routes/posts');
 var recipes = require('./routes/recipes');
 
 
@@ -34,6 +35,7 @@ app.use('/info', info);
 app.use('/users', users);
 app.use('/ouhuang',ouhuang);
 app.use('/recipes', recipes);
+app.use('/posts', posts);
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build/index.html'));

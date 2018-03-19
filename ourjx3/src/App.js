@@ -2,37 +2,40 @@ import React, { Component } from 'react';
 import logo from './banner.jpeg';
 import './App.css';
 import MyImage from './MyImage.js';
-import Friends from './friends.js'
 import {Switch,Route, Link} from 'react-router-dom';
 import Black from './component/black.js';
 import Red from './component/red.js';
 import Recipes from './component/recipes.js';
 import Posts from './component/posts.js';
-import Xiaobai from './friends/friendInfo.js';
+import FriendInfo from './friends/friendInfo.js';
+import Xiaobai from './friends/xiaobai.js';
 import Register from './component/register.js'
 import Login from './component/login'
 import PersonInfo from './friends/person'
 import UpdateInfo from './friends/updateInfo'
-
+import { Layout, Menu, Icon, Button} from 'antd';
+import axios from 'axios'
+import  'antd/dist/antd.css';
+const { Header, Content, Footer, Sider } = Layout;
+const SubMenu = Menu.SubMenu;
 class App extends Component {
   render() {
     return (
       <div className="App">
+      <Layout style={{ minHeight: '100vh' }}>
         <header className="App-header">
           <img src={logo} className="banner" alt="logo" />
         </header>
-          
-          <div className="col-sm-2">
-            <div className="row">
-               <SideBar/>
-            </div>
-            <Login className="Login"/>
-          </div>   
-          
-            <div className="col-sm-10">
-              <Switch >
+      
+        
+       <Content >
+        <Layout>
+        <SideBar /> 
+        <Content style={{ margin: '0 16px',minHeight:480 }}>
+          <Switch >
               <Route exact path="/" component={Home}/>
-              <Route path='/friends/:number' component={Xiaobai}/>
+              <Route path='/friends/:number' component={FriendInfo} />
+              
               <Route path="/black" component={Black} />
               <Route path="/red" component={Red} />
               <Route path="/meals" component={Recipes} />
@@ -43,7 +46,16 @@ class App extends Component {
               
               <Route component={Notfound} />
               </Switch>
-            </div>
+          </Content>
+        </Layout>
+      </Content>
+     
+      <Footer style={{ textAlign: 'center' }}>
+        小白是欧皇 ©2018 Created by jx
+      </Footer>
+    
+  </Layout>
+        
             
       </div>
     );
@@ -92,30 +104,60 @@ class Notfound extends Component{
 }
 }
 class SideBar extends Component{
-  
+  constructor(props){
+    super(props);
+    this.state={
+      friends:[]
+    }
+  }
+  componentDidMount() {
+    axios.get('/info')
+      .then(res => {
+        this.setState({friends: res.data})
+        //console.log(this.state.friends);
+      });
+    }
   render(){
     return(
-      <div className="csidenav">
-         <h4 className="header" >非酋集中营</h4>
-        <Switch>
-          <ul className="nav nav-pills nav-stacked">
-            
-            <li ><Link to="/">主页</Link></li>
-            <li className="dropdown"><a className="dropdown-toggle" data-toggle="dropdown" href="#section2">黑鬼们 
-            <span className="caret"></span></a>
-              <Friends />
-            </li>
-            <li><Link to="/black">谁去黑本</Link></li>
-            <li><Link to="/red">欧皇时刻</Link></li>
-            <li><Link to="/meals">今天吃啥</Link></li>
-            <li><Link to="/posts">有啥说啥</Link></li>
-
-          </ul>
-      
+         
+          <Sider
+          breakpoint="lg"
+          collapsedWidth="0"
           
-          </Switch>
- 
-      </div>
+        >
+     <h4 className="header" >非酋集中营</h4>
+      <Menu theme="dark" mode="inline" >
+        <Menu.Item key="1">
+          <Link to="/"><Icon type="pie-chart" />
+          <span className="nav-text">主页</span></Link>
+        </Menu.Item>
+        <SubMenu
+              key="sub1"
+              title={<span><Icon type="user" /><span>黑鬼们</span></span>}
+            >{this.state.friends.map((friends)=><Menu.Item  key={friends.id}> <Link to={"/friends/"+friends.id}><span className="nav-text">{friends.nickname}</span></Link></Menu.Item>)}
+              
+            </SubMenu>
+        <Menu.Item key="2">
+          <Link to="/black"><Icon type="team" />
+         <span className="nav-text">谁去黑本</span></Link>
+        </Menu.Item>
+        <Menu.Item key="3">
+           <Link to="/red"><Icon type="file" />
+         <span className="nav-text">欧皇时刻</span></Link>
+        </Menu.Item>
+        <Menu.Item key="5">
+          <Link to="/meals"><Icon type="file" />
+          <span className="nav-text">今天吃啥</span></Link>
+        </Menu.Item>
+
+        <Menu.Item key="4">
+           <Link to="/posts"><Icon type="user" />
+         <span className="nav-text">有啥说啥</span></Link>
+        </Menu.Item>
+      </Menu>
+      <Login className="Login"/>
+    </Sider>
+      
       
     );
   }

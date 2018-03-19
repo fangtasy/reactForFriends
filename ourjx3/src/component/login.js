@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {login,logout} from '../redux/loginReducer'
+import {logoff,getInfo} from '../redux/infoReducer'
 import {connect} from 'react-redux'
 import {withRouter,Link} from 'react-router-dom';
+import cookies from 'browser-cookies'
+import {Button} from 'antd'
 import './login.css'
 class Login extends Component{
   constructor(props){
@@ -24,17 +27,24 @@ class Login extends Component{
    // console.log(this.props)
   }
   handleLogout(){
+    cookies.erase('userid')
     this.props.logout()
+    this.props.logoff()
+
   }
   render(){
-    if(this.props.loginStatus.loginReducer.logged==true)
-      return(<button onClick={this.handleLogout}>Log out</button>)
+    if(cookies.get('userid'))
+      return(<div>
+        <div><Link to={'/info/'+cookies.get('userid')}>个人中心</Link></div>
+        <Button onClick={this.handleLogout}>Log out</Button>
+        </div>
+        )
     return(
       <div>        
           <div  className="dropdown">
-            <button  className="col-md-12" data-toggle="dropdown">
+            <Button  data-toggle="dropdown">
               <b>Login</b> <span className="caret"></span>
-            </button>
+            </Button>
               <ul id="login-dp" className="dropdown-menu">
                 <li>
                    <div className="row">
@@ -69,6 +79,6 @@ class Login extends Component{
 const mapStatetoProps=(state)=>{
   return {loginStatus: state}
 }
-const actionCreators={login,logout}
+const actionCreators={login,logout,logoff,getInfo}
 Login=connect(mapStatetoProps,actionCreators)(Login)
 export default withRouter(Login)

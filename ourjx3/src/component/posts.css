@@ -1,0 +1,8 @@
+.table{
+	width:90%;
+	transform: translate(8%);
+}
+.author{
+	position: absolute;
+	right: 5%;
+}

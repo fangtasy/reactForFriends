@@ -1,0 +1,16 @@
+.input-group{
+	width: 100%;
+	padding: 5%;
+}
+.line{
+	width: 100%;
+	text-align: left;
+	transform: translate(20%);
+	padding: 3px;
+}
+
+.line input{
+	position: absolute;
+	left: 30%;
+
+}
